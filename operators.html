@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>C Programming Questions</title>
+
+    <style>
+        body {
+            background-color: lightyellow;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            color: darkblue;
+        }
+
+        h1 {
+            text-align: center;
+            color: darkblue;
+        }
+
+        h2 {
+            color: darkgreen;
+        }
+
+        .question {
+            background-color: white;
+            border: 2px solid lightblue;
+            border-radius: 10px;
+            padding: 12px;
+            margin: 10px 0;
+        }
+
+        a {
+            color: darkblue;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: red;
+        }
+
+        #result {
+            display: none;
+            background-color: white;
+            border: 2px solid lightblue;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        /* Program left aur output right side */
+        .result-box {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            margin-top: 15px;
+        }
+
+        .program-box,
+        .output-box {
+            flex: 1;
+            min-width: 0;
+            background-color: #f8ffff;
+            border: 1px solid lightblue;
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        pre {
+            background-color: #eeeeee;
+            color: black;
+            padding: 12px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            min-height: 100px;
+        }
+
+        button {
+            background-color: darkblue;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background-color: darkgreen;
+        }
+
+        /* Mobile screen ke liye */
+        @media (max-width: 600px) {
+            .result-box {
+                flex-direction: column;
+            }
+
+            .program-box,
+            .output-box {
+                width: auto;
+                align-self: stretch;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>C Programming Questions</h1>
+
+    <p style="text-align:center;">
+        Operators and Basic Calculation Programs
+    </p>
+
+    <h2>Click on a question to see its program and output</h2>
+
+    <div class="question">
+        <a href="#result" onclick="showProgram(0, this.textContent.trim())">
+            1. Write a program to show an example of pre-increment.
+        </a>
+    </div>
+
+    <div class="question">
+        <a href="#result" onclick="showProgram(1, this.textContent.trim())">
+            2. Write a program to show an example of post-increment.
+        </a>
+    </div>
+
+    <div class="question">
+        <a href="#result" onclick="showProgram(2, this.textContent.trim())">
+            3. Write a program to show an example of pre-decrement.
+        </a>
+    </div>
+
+    <div class="question">
+        <a href="#result" onclick="showProgram(3, this.textContent.trim())">
+            4. Write a program to show an example of post-decrement.
+        </a>
+    </div>
+
+    <div class="question">
+        <a href="#result" onclick="showProgram(4, this.textContent.trim())">
+            5. Write a program to perform addition, subtraction, multiplication, division and remainder.
+        </a>
+    </div>
+
+    <div class="question">
+        <a href="#result" onclick="showProgram(5, this.textContent.trim())">
+            6. Write a program to print the last digit of a number.
+        </a>
+    </div>
+
+    <div class="question">
+        <a href="#result" onclick="showProgram(6, this.textContent.trim())">
+            7. Write a program to print the digits after the decimal point.
+        </a>
+    </div>
+
+    <div class="question">
+        <a href="#result" onclick="showProgram(7, this.textContent.trim())">
+            8. Write a program to find the cube of a number.
+        </a>
+    </div>
+
+    <div class="question">
+        <a href="#result" onclick="showProgram(8, this.textContent.trim())">
+            9. Write a program to round off a number.
+        </a>
+    </div>
+
+    <div class="question">
+        <a href="#result" onclick="showProgram(9, this.textContent.trim())">
+            10. Write a program to convert a lowercase character into uppercase.
+        </a>
+    </div>
+
+    <div class="question">
+        <a href="#result" onclick="showProgram(10, this.textContent.trim())">
+            11. Write a program to calculate the average marks of five subjects.
+        </a>
+    </div>
+
+    <div class="question">
+        <a href="#result" onclick="showProgram(11, this.textContent.trim())">
+            12. Write a program to calculate simple interest.
+        </a>
+    </div>
+
+    <!-- Program aur output section -->
+
+    <div id="result">
+
+        <h2 id="title"></h2>
+
+        <div class="result-box">
+
+            <div class="program-box">
+                <h3>Program:</h3>
+                <pre id="code"></pre>
+            </div>
+
+            <div class="output-box">
+                <h3>Expected Output:</h3>
+                <pre id="output"></pre>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Home button -->
+
+    <div style="text-align:center;">
+        <button onclick="window.location.href='home.html'">
+            Home
+        </button>
+    </div>
+
+    <script>
+        var codes = [
+
+`#include <stdio.h>
+
+int main()
+{
+    int x = 5;
+    int y = ++x;
+
+    printf("THE VALUE OF X: %d\\n", x);
+    printf("THE VALUE OF Y: %d", y);
+
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main()
+{
+    int x = 5;
+    int y = x++;
+
+    printf("THE VALUE OF X: %d\\n", x);
+    printf("THE VALUE OF Y: %d", y);
+
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main()
+{
+    int x = 5;
+    int y = --x;
+
+    printf("THE VALUE OF X: %d\\n", x);
+    printf("THE VALUE OF Y: %d", y);
+
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main()
+{
+    int x = 5;
+    int y = x--;
+
+    printf("THE VALUE OF X: %d\\n", x);
+    printf("THE VALUE OF Y: %d", y);
+
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main()
+{
+    int num1, num2;
+
+    printf("Enter first number: ");
+    scanf("%d", &num1);
+
+    printf("Enter second number: ");
+    scanf("%d", &num2);
+
+    printf("Addition = %d\\n", num1 + num2);
+    printf("Subtraction = %d\\n", num1 - num2);
+    printf("Multiplication = %d\\n", num1 * num2);
+
+    if(num2 != 0)
+    {
+        printf("Division = %d\\n", num1 / num2);
+        printf("Remainder = %d\\n", num1 % num2);
+    }
+    else
+    {
+        printf("Division by zero is not possible.\\n");
+        printf("Remainder by zero is not possible.\\n");
+    }
+
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main()
+{
+    int num;
+
+    printf("Enter a number: ");
+    scanf("%d", &num);
+
+    printf("Last Digit: %d", num % 10);
+
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+#include <string.h>
+
+int main()
+{
+    char num[50];
+    char *point;
+
+    printf("Enter a decimal number: ");
+    scanf("%49s", num);
+
+    point = strchr(num, '.');
+
+    if(point != NULL && *(point + 1) != '\\0')
+    {
+        printf("Digits after decimal point: %s",
+               point + 1);
+    }
+    else
+    {
+        printf("No digits after decimal point.");
+    }
+
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main()
+{
+    int num;
+    int cube;
+
+    printf("Enter a number: ");
+    scanf("%d", &num);
+
+    cube = num * num * num;
+
+    printf("Cube of %d is: %d", num, cube);
+
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main()
+{
+    double num;
+    int rounded;
+
+    printf("Enter a number: ");
+    scanf("%lf", &num);
+
+    if(num >= 0)
+        rounded = (int)(num + 0.5);
+    else
+        rounded = (int)(num - 0.5);
+
+    printf("Rounded number: %d", rounded);
+
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main()
+{
+    char ch;
+
+    printf("Enter a lowercase character: ");
+    scanf(" %c", &ch);
+
+    if(ch >= 'a' && ch <= 'z')
+    {
+        printf("Uppercase character: %c", ch - 32);
+    }
+    else
+    {
+        printf("Invalid input. Enter a lowercase character.");
+    }
+
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main()
+{
+    int m1, m2, m3, m4, m5;
+    float average;
+
+    printf("Enter marks of first subject: ");
+    scanf("%d", &m1);
+
+    printf("Enter marks of second subject: ");
+    scanf("%d", &m2);
+
+    printf("Enter marks of third subject: ");
+    scanf("%d", &m3);
+
+    printf("Enter marks of fourth subject: ");
+    scanf("%d", &m4);
+
+    printf("Enter marks of fifth subject: ");
+    scanf("%d", &m5);
+
+    average = (m1 + m2 + m3 + m4 + m5) / 5.0;
+
+    printf("Average marks: %.2f", average);
+
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main()
+{
+    float p, r, t, interest;
+
+    printf("Enter the principal amount: ");
+    scanf("%f", &p);
+
+    printf("Enter the rate of interest: ");
+    scanf("%f", &r);
+
+    printf("Enter the time in years: ");
+    scanf("%f", &t);
+
+    interest = (p * r * t) / 100;
+
+    printf("The simple interest is: %.2f", interest);
+
+    return 0;
+}`
+
+        ];
+
+        var outputs = [
+
+`THE VALUE OF X: 6
+THE VALUE OF Y: 6`,
+
+`THE VALUE OF X: 6
+THE VALUE OF Y: 5`,
+
+`THE VALUE OF X: 4
+THE VALUE OF Y: 4`,
+
+`THE VALUE OF X: 4
+THE VALUE OF Y: 5`,
+
+`Enter first number: 20
+Enter second number: 6
+Addition = 26
+Subtraction = 14
+Multiplication = 120
+Division = 3
+Remainder = 2`,
+
+`Enter a number: 1234
+Last Digit: 4`,
+
+`Enter a decimal number: 12.456
+Digits after decimal point: 456`,
+
+`Enter a number: 5
+Cube of 5 is: 125`,
+
+`Enter a number: 12.7
+Rounded number: 13`,
+
+`Enter a lowercase character: a
+Uppercase character: A`,
+
+`Enter marks of first subject: 80
+Enter marks of second subject: 70
+Enter marks of third subject: 90
+Enter marks of fourth subject: 85
+Enter marks of fifth subject: 75
+Average marks: 80.00`,
+
+`Enter the principal amount: 1000
+Enter the rate of interest: 5
+Enter the time in years: 2
+The simple interest is: 100.00`
+
+        ];
+
+        function showProgram(n, question)
+        {
+            document.getElementById("result").style.display = "block";
+
+            // Click kiya hua poora question heading mein show hoga
+            document.getElementById("title").innerText = question;
+
+            // Selected program aur uska output
+            document.getElementById("code").innerText = codes[n];
+            document.getElementById("output").innerText = outputs[n];
+
+            // Result tak smoothly scroll hoga
+            document.getElementById("result").scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
+    </script>
+
+</body>
+</html>

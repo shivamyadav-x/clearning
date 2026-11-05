@@ -1,0 +1,918 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C Programming Questions - Loops & Number Programs</title>
+
+    <style>
+        body {
+            background-color: lightyellow;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            color: darkblue;
+        }
+
+        h1 {
+            text-align: center;
+            color: darkblue;
+        }
+
+        h2 {
+            color: darkgreen;
+        }
+
+        .question {
+            background-color: white;
+            border: 2px solid lightblue;
+            border-radius: 10px;
+            padding: 12px;
+            margin: 10px 0;
+        }
+
+        .question a {
+            color: darkblue;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .question a:hover {
+            color: red;
+        }
+
+        #result {
+            display: none;
+            background-color: white;
+            border: 2px solid lightblue;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        .result-box {
+            display: flex;
+            gap: 20px;
+        }
+
+        .program-box, .output-box {
+            flex: 1;
+            min-width: 0;
+            background-color: #f8ffff;
+            border: 2px solid lightblue;
+            border-radius: 10px;
+            padding: 12px;
+        }
+
+        pre {
+            background-color: #eeeeee;
+            color: black;
+            padding: 12px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            overflow-x: auto;
+        }
+
+        button {
+            background-color: darkblue;
+            color: white;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 8px 5px 8px 0;
+        }
+
+        button:hover {
+            background-color: darkgreen;
+        }
+
+        .top-button {
+            text-align: center;
+            margin: 20px;
+        }
+
+        @media (max-width: 700px) {
+            .result-box {
+                flex-direction: column;
+            }
+
+            body {
+                margin: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>C Programming Questions</h1>
+    <p style="text-align:center;">Loops & Number Programs</p>
+
+    <h2>Click on a question to see its program and output</h2>
+
+    <div id="questionBox"></div>
+
+    <div id="result">
+        <h2 id="title"></h2>
+
+        <div class="result-box">
+            <div class="program-box">
+                <h3>C Program</h3>
+                <pre id="code"></pre>
+            </div>
+
+            <div class="output-box">
+                <h3>Sample Output</h3>
+                <pre id="output"></pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="top-button">
+        <button onclick="location.href='home.html'">Home</button>
+    </div>
+
+    <script>
+        const questions = [
+            "Enter a number and find its binary representation.",
+            "Check which prime numbers divide a given number.",
+            "Check whether a number is prime or not.",
+            "Print every digit of a number on a separate line.",
+            "Print your name 1 lakh times.",
+            "Print the series from 1 to 1 lakh.",
+            "Enter a number and print the series from 0 to that number.",
+            "Print a given number 100 times.",
+            "Print all odd numbers between 1 and 100.",
+            "Print the multiplication table of 4 up to 20.",
+            "Enter a number and reverse it.",
+            "Create a calculator using menu choices and Q to quit.",
+            "Check whether a number is a palindrome.",
+            "Enter a base and power and calculate the result.",
+            "Print the first digit of a number.",
+            "Find the total from 0 to a given number.",
+            "Find the factorial of a number.",
+            "Print the range between two numbers.",
+            "Accept a password of up to 20 characters; press Enter to exit.",
+            "Print counting from 1 to 100 with a one-second delay.",
+            "Print the Fibonacci series up to 100.",
+            "Check whether an entered character is an alphabet.",
+            "Check whether a number is a palindrome (Question 23).",
+            "Check whether a number is an Armstrong number.",
+            "Check whether a number is an Armstrong number (Question 25)."
+        ];
+
+        const codes = [
+`#include <stdio.h>
+
+void binary(int n)
+{
+    int bits[32], i = 0;
+
+    if (n == 0) {
+        printf("0");
+        return;
+    }
+
+    if (n < 0) {
+        printf("Please enter a non-negative number.");
+        return;
+    }
+
+    while (n > 0) {
+        bits[i++] = n % 2;
+        n /= 2;
+    }
+
+    for (int j = i - 1; j >= 0; j--)
+        printf("%d", bits[j]);
+}
+
+int main(void)
+{
+    int num;
+    printf("Enter the number: ");
+    scanf("%d", &num);
+
+    printf("Binary of %d is: ", num);
+    binary(num);
+    printf("\\n");
+
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int prime(int n)
+{
+    if (n < 2)
+        return 0;
+
+    for (int i = 2; i * i <= n; i++) {
+        if (n % i == 0)
+            return 0;
+    }
+
+    return 1;
+}
+
+int main(void)
+{
+    int num, flag = 0;
+
+    printf("Enter a number: ");
+    scanf("%d", &num);
+
+    printf("Prime numbers that divide %d are: ", num);
+
+    for (int i = 2; i <= num / 2; i++) {
+        if (prime(i) && num % i == 0) {
+            printf("%d ", i);
+            flag = 1;
+        }
+    }
+
+    if (!flag)
+        printf("None");
+
+    printf("\\n");
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main(void)
+{
+    int num, flag = 0;
+
+    printf("Enter a number: ");
+    scanf("%d", &num);
+
+    if (num <= 1) {
+        printf("%d is not a prime number.\\n", num);
+        return 0;
+    }
+
+    for (int i = 2; i * i <= num; i++) {
+        if (num % i == 0) {
+            flag = 1;
+            break;
+        }
+    }
+
+    if (flag == 0)
+        printf("%d is a prime number.\\n", num);
+    else
+        printf("%d is not a prime number.\\n", num);
+
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main(void)
+{
+    char num[100];
+
+    printf("Enter a number: ");
+    scanf("%99s", num);
+
+    int start = (num[0] == '-') ? 1 : 0;
+
+    for (int i = start; num[i] != '\\0'; i++) {
+        printf("%c\\n", num[i]);
+    }
+
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main(void)
+{
+    for (int i = 1; i <= 100000; i++) {
+        printf("Taranpreet\\n");
+    }
+
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main(void)
+{
+    for (int i = 1; i <= 100000; i++) {
+        printf("%d\\n", i);
+    }
+
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main(void)
+{
+    int num;
+
+    printf("Enter a number: ");
+    scanf("%d", &num);
+
+    if (num < 0) {
+        printf("Please enter a non-negative number.\\n");
+        return 0;
+    }
+
+    for (int i = 0; i <= num; i++) {
+        printf("%d\\n", i);
+    }
+
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main(void)
+{
+    int num;
+
+    printf("Enter a number: ");
+    scanf("%d", &num);
+
+    for (int i = 1; i <= 100; i++) {
+        printf("%d ", num);
+    }
+
+    printf("\\n");
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main(void)
+{
+    for (int i = 1; i <= 100; i++) {
+        if (i % 2 != 0)
+            printf("%d ", i);
+    }
+
+    printf("\\n");
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main(void)
+{
+    int n = 4;
+
+    for (int i = 1; i <= 20; i++) {
+        printf("%d x %d = %d\\n", n, i, n * i);
+    }
+
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main(void)
+{
+    int num, reversed = 0, remainder;
+
+    printf("Enter a number: ");
+    scanf("%d", &num);
+
+    while (num != 0) {
+        remainder = num % 10;
+        reversed = reversed * 10 + remainder;
+        num /= 10;
+    }
+
+    printf("Reversed number: %d\\n", reversed);
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main(void)
+{
+    int choice, a, b;
+    char ch;
+
+    while (1) {
+        printf("\\nCHOICE:\\n");
+        printf("1. Addition\\n2. Subtraction\\n");
+        printf("3. Multiplication\\n4. Division\\n");
+        printf("5. Modulo\\nQ. Quit\\n");
+        printf("Enter your choice: ");
+        scanf(" %c", &ch);
+
+        if (ch == 'Q' || ch == 'q') {
+            printf("Exiting program...\\n");
+            break;
+        }
+
+        if (ch < '1' || ch > '5') {
+            printf("Invalid choice\\n");
+            continue;
+        }
+
+        choice = ch - '0';
+
+        printf("Enter two integers: ");
+        scanf("%d %d", &a, &b);
+
+        switch (choice) {
+            case 1:
+                printf("Addition = %d\\n", a + b);
+                break;
+            case 2:
+                printf("Subtraction = %d\\n", a - b);
+                break;
+            case 3:
+                printf("Multiplication = %d\\n", a * b);
+                break;
+            case 4:
+                if (b != 0)
+                    printf("Division = %.2f\\n", (float)a / b);
+                else
+                    printf("Division by zero is not allowed.\\n");
+                break;
+            case 5:
+                if (b != 0)
+                    printf("Modulo = %d\\n", a % b);
+                else
+                    printf("Modulo by zero is not allowed.\\n");
+                break;
+        }
+    }
+
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main(void)
+{
+    int num, reversed = 0, remainder;
+
+    printf("Enter a number: ");
+    scanf("%d", &num);
+
+    int original = num;
+
+    if (num < 0) {
+        printf("Please enter a non-negative number.\\n");
+        return 0;
+    }
+
+    while (num != 0) {
+        remainder = num % 10;
+        reversed = reversed * 10 + remainder;
+        num /= 10;
+    }
+
+    if (original == reversed)
+        printf("%d is a palindrome number.\\n", original);
+    else
+        printf("%d is not a palindrome number.\\n", original);
+
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main(void)
+{
+    double base, result = 1;
+    int power;
+
+    printf("Enter base number: ");
+    scanf("%lf", &base);
+
+    printf("Enter a non-negative integer power: ");
+    scanf("%d", &power);
+
+    if (power < 0) {
+        printf("Please enter a non-negative power.\\n");
+        return 0;
+    }
+
+    for (int i = 1; i <= power; i++)
+        result *= base;
+
+    printf("%.2f raised to the power %d = %.2f\\n",
+           base, power, result);
+
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main(void)
+{
+    int num;
+
+    printf("Enter the number: ");
+    scanf("%d", &num);
+
+    if (num < 0)
+        num = -num;
+
+    while (num >= 10)
+        num /= 10;
+
+    printf("The first digit is: %d\\n", num);
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main(void)
+{
+    int n;
+    long long sum = 0;
+
+    printf("Enter a number: ");
+    scanf("%d", &n);
+
+    if (n < 0) {
+        printf("Please enter a non-negative number.\\n");
+        return 0;
+    }
+
+    for (int i = 0; i <= n; i++)
+        sum += i;
+
+    printf("The total from 0 to %d is: %lld\\n", n, sum);
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main(void)
+{
+    int n;
+    unsigned long long factorial = 1;
+
+    printf("Enter the number (0 to 20): ");
+    scanf("%d", &n);
+
+    if (n < 0 || n > 20) {
+        printf("Enter a number between 0 and 20.\\n");
+        return 0;
+    }
+
+    for (int i = 1; i <= n; i++)
+        factorial *= i;
+
+    printf("Factorial of %d is: %llu\\n", n, factorial);
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main(void)
+{
+    int num1, num2;
+
+    printf("Enter first number: ");
+    scanf("%d", &num1);
+
+    printf("Enter second number: ");
+    scanf("%d", &num2);
+
+    if (num1 > num2) {
+        printf("First number must be smaller than or equal to second.\\n");
+        return 0;
+    }
+
+    printf("Numbers from %d to %d are:\\n", num1, num2);
+
+    for (int i = num1; i <= num2; i++)
+        printf("%d ", i);
+
+    printf("\\n");
+    return 0;
+}`,
+
+`#include <stdio.h>
+#include <string.h>
+
+int main(void)
+{
+    char password[100];
+
+    while (1) {
+        printf("Enter password (maximum 20 characters),");
+        printf(" or press Enter to exit:\\n");
+
+        if (fgets(password, sizeof(password), stdin) == NULL)
+            break;
+
+        password[strcspn(password, "\\n")] = '\\0';
+
+        if (strlen(password) == 0) {
+            printf("Exiting program...\\n");
+            break;
+        }
+
+        if (strlen(password) > 20) {
+            printf("Password must be 20 characters or less.\\n");
+            continue;
+        }
+
+        printf("You entered: %s\\n", password);
+    }
+
+    return 0;
+}`,
+
+`#include <stdio.h>
+#include <time.h>
+
+int main(void)
+{
+    for (int i = 1; i <= 100; i++) {
+        printf("%d\\n", i);
+        fflush(stdout);
+
+        clock_t start = clock();
+        while ((double)(clock() - start) / CLOCKS_PER_SEC < 1.0) {
+        }
+    }
+
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main(void)
+{
+    int a = 0, b = 1, next;
+
+    printf("Fibonacci series up to 100:\\n");
+
+    while (a <= 100) {
+        printf("%d ", a);
+        next = a + b;
+        a = b;
+        b = next;
+    }
+
+    printf("\\n");
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main(void)
+{
+    char ch;
+
+    printf("Enter a character: ");
+    scanf(" %c", &ch);
+
+    if ((ch >= 'A' && ch <= 'Z') ||
+        (ch >= 'a' && ch <= 'z')) {
+        printf("%c is an alphabet.\\n", ch);
+    } else {
+        printf("%c is not an alphabet.\\n", ch);
+    }
+
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main(void)
+{
+    int num, reversed = 0, remainder;
+
+    printf("Enter a number: ");
+    scanf("%d", &num);
+
+    int original = num;
+
+    if (num < 0) {
+        printf("Please enter a non-negative number.\\n");
+        return 0;
+    }
+
+    while (num != 0) {
+        remainder = num % 10;
+        reversed = reversed * 10 + remainder;
+        num /= 10;
+    }
+
+    if (original == reversed)
+        printf("%d is a palindrome number.\\n", original);
+    else
+        printf("%d is not a palindrome number.\\n", original);
+
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main(void)
+{
+    int n, original, temp, digits = 0;
+    long long sum = 0;
+
+    printf("Enter a number: ");
+    scanf("%d", &n);
+
+    if (n < 0) {
+        printf("Negative numbers are not considered here.\\n");
+        return 0;
+    }
+
+    original = n;
+    temp = n;
+
+    do {
+        digits++;
+        temp /= 10;
+    } while (temp != 0);
+
+    temp = n;
+
+    do {
+        int digit = temp % 10;
+        long long power = 1;
+
+        for (int i = 0; i < digits; i++)
+            power *= digit;
+
+        sum += power;
+        temp /= 10;
+    } while (temp != 0);
+
+    if (sum == original)
+        printf("%d is an Armstrong number.\\n", original);
+    else
+        printf("%d is not an Armstrong number.\\n", original);
+
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main(void)
+{
+    int n, original, temp, digits = 0;
+    long long sum = 0;
+
+    printf("Enter a number: ");
+    scanf("%d", &n);
+
+    if (n < 0) {
+        printf("Negative numbers are not considered here.\\n");
+        return 0;
+    }
+
+    original = n;
+    temp = n;
+
+    do {
+        digits++;
+        temp /= 10;
+    } while (temp != 0);
+
+    temp = n;
+
+    do {
+        int digit = temp % 10;
+        long long power = 1;
+
+        for (int i = 0; i < digits; i++)
+            power *= digit;
+
+        sum += power;
+        temp /= 10;
+    } while (temp != 0);
+
+    if (sum == original)
+        printf("%d is an Armstrong number.\\n", original);
+    else
+        printf("%d is not an Armstrong number.\\n", original);
+
+    return 0;
+}`
+        ];
+
+        const outputs = [
+`Enter the number: 10
+Binary of 10 is: 1010`,
+`Enter a number: 12
+Prime numbers that divide 12 are: 2 3`,
+`Enter a number: 7
+7 is a prime number.`,
+`Enter a number: 123
+1
+2
+3`,
+`Taranpreet
+Taranpreet
+... (printed 100000 times)`,
+`1
+2
+3
+...
+100000`,
+`Enter a number: 5
+0
+1
+2
+3
+4
+5`,
+`Enter a number: 7
+7 7 7 7 7 ... (100 times)`,
+`1 3 5 7 9 11 13 15 17 19 ... 99`,
+`4 x 1 = 4
+4 x 2 = 8
+...
+4 x 20 = 80`,
+`Enter a number: 1234
+Reversed number: 4321`,
+`Enter your choice: 1
+Enter two integers: 5 3
+Addition = 8
+Enter your choice: Q
+Exiting program...`,
+`Enter a number: 121
+121 is a palindrome number.`,
+`Enter base number: 2
+Enter a non-negative integer power: 3
+2.00 raised to the power 3 = 8.00`,
+`Enter the number: 5678
+The first digit is: 5`,
+`Enter a number: 5
+The total from 0 to 5 is: 15`,
+`Enter the number (0 to 20): 5
+Factorial of 5 is: 120`,
+`Enter first number: 2
+Enter second number: 6
+Numbers from 2 to 6 are:
+2 3 4 5 6`,
+`Enter password (maximum 20 characters), or press Enter to exit:
+hello123
+You entered: hello123
+Press Enter to exit.`,
+`1
+2
+3
+...
+100
+(Approximately one second between numbers)`,
+`Fibonacci series up to 100:
+0 1 1 2 3 5 8 13 21 34 55 89`,
+`Enter a character: A
+A is an alphabet.`,
+`Enter a number: 121
+121 is a palindrome number.`,
+`Enter a number: 153
+153 is an Armstrong number.`,
+`Enter a number: 370
+370 is an Armstrong number.`
+        ];
+
+        const questionBox = document.getElementById("questionBox");
+
+        questions.forEach((question, index) => {
+            const card = document.createElement("div");
+            card.className = "question";
+
+            const link = document.createElement("a");
+            link.href = "#result";
+            link.textContent = (index + 1) + ". " + question;
+
+            link.addEventListener("click", function (event) {
+                event.preventDefault();
+                showProgram(index);
+            });
+
+            card.appendChild(link);
+            questionBox.appendChild(card);
+        });
+
+        function showProgram(index) {
+            document.getElementById("result").style.display = "block";
+
+            document.getElementById("title").textContent =
+                (index + 1) + ". " + questions[index];
+
+            document.getElementById("code").textContent = codes[index];
+            document.getElementById("output").textContent = outputs[index];
+
+            document.getElementById("result").scrollIntoView({
+                behavior: "smooth"
+            });
+        }
+    </script>
+
+</body>
+</html>

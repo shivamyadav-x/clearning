@@ -1,0 +1,468 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>C Language - Multidimensional Array</title>
+
+    <style>
+        body {
+            background-color: lightyellow;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            color: darkblue;
+        }
+
+        h1 {
+            text-align: center;
+            color: darkblue;
+        }
+
+        h2 {
+            color: darkgreen;
+        }
+
+        .question {
+            background-color: white;
+            border: 2px solid lightblue;
+            border-radius: 10px;
+            padding: 12px;
+            margin: 10px 0;
+        }
+
+        .question a {
+            color: darkblue;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .question a:hover {
+            color: red;
+        }
+
+        #result {
+            display: none;
+            background-color: white;
+            border: 2px solid lightblue;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        .result-box {
+            display: flex;
+            gap: 20px;
+        }
+
+        .program-box, .output-box {
+            flex: 1;
+            min-width: 0;
+            background-color: #f8ffff;
+            border: 2px solid lightblue;
+            border-radius: 10px;
+            padding: 12px;
+        }
+
+        pre {
+            background-color: #eeeeee;
+            color: black;
+            padding: 12px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: darkblue;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: darkgreen;
+        }
+
+        .home {
+            text-align: center;
+            margin: 30px 0 10px;
+        }
+
+        @media (max-width: 700px) {
+            .result-box {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Multidimensional Array</h1>
+
+    <p style="text-align:center;">
+        Click any question to view its program and output.
+    </p>
+
+    <h2>List of Questions</h2>
+
+    <div id="questions"></div>
+
+    <div id="result">
+        <h2 id="questionTitle"></h2>
+
+        <div class="result-box">
+            <div class="program-box">
+                <h3>C Program</h3>
+                <pre id="code"></pre>
+            </div>
+
+            <div class="output-box">
+                <h3>Sample Output</h3>
+                <pre id="output"></pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="home">
+        <button onclick="location.href='home.html'">Home</button>
+    </div>
+
+    <script>
+        const questions = [
+            "1. Enter four numbers and display them in a 2×2 matrix.",
+            "2. Enter a matrix and display its transpose.",
+            "3. Enter two matrices and add them.",
+            "4. Enter two matrices and subtract them.",
+            "5. Enter two matrices and multiply them."
+        ];
+
+        const codes = [
+
+String.raw`#include <stdio.h>
+
+int main(void) {
+    int matrix[2][2], i, j;
+
+    printf("Enter four numbers:\n");
+
+    for (i = 0; i < 2; i++) {
+        for (j = 0; j < 2; j++) {
+            scanf("%d", &matrix[i][j]);
+        }
+    }
+
+    printf("Matrix is:\n");
+
+    for (i = 0; i < 2; i++) {
+        for (j = 0; j < 2; j++) {
+            printf("%d\t", matrix[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}`,
+
+String.raw`#include <stdio.h>
+
+int main(void) {
+    int a[10][10], transpose[10][10];
+    int r, c, i, j;
+
+    printf("Enter rows and columns (max 10): ");
+    scanf("%d%d", &r, &c);
+
+    if (r < 1 || r > 10 || c < 1 || c > 10) {
+        printf("Invalid matrix size!\n");
+        return 0;
+    }
+
+    printf("Enter matrix elements:\n");
+
+    for (i = 0; i < r; i++) {
+        for (j = 0; j < c; j++) {
+            scanf("%d", &a[i][j]);
+        }
+    }
+
+    for (i = 0; i < r; i++) {
+        for (j = 0; j < c; j++) {
+            transpose[j][i] = a[i][j];
+        }
+    }
+
+    printf("Original matrix:\n");
+
+    for (i = 0; i < r; i++) {
+        for (j = 0; j < c; j++) {
+            printf("%d\t", a[i][j]);
+        }
+        printf("\n");
+    }
+
+    printf("Transpose of matrix:\n");
+
+    for (i = 0; i < c; i++) {
+        for (j = 0; j < r; j++) {
+            printf("%d\t", transpose[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}`,
+
+String.raw`#include <stdio.h>
+
+int main(void) {
+    int a[10][10], b[10][10], sum[10][10];
+    int r, c, i, j;
+
+    printf("Enter rows and columns (max 10): ");
+    scanf("%d%d", &r, &c);
+
+    if (r < 1 || r > 10 || c < 1 || c > 10) {
+        printf("Invalid matrix size!\n");
+        return 0;
+    }
+
+    printf("Enter first matrix elements:\n");
+
+    for (i = 0; i < r; i++) {
+        for (j = 0; j < c; j++) {
+            scanf("%d", &a[i][j]);
+        }
+    }
+
+    printf("Enter second matrix elements:\n");
+
+    for (i = 0; i < r; i++) {
+        for (j = 0; j < c; j++) {
+            scanf("%d", &b[i][j]);
+        }
+    }
+
+    for (i = 0; i < r; i++) {
+        for (j = 0; j < c; j++) {
+            sum[i][j] = a[i][j] + b[i][j];
+        }
+    }
+
+    printf("Sum of matrices:\n");
+
+    for (i = 0; i < r; i++) {
+        for (j = 0; j < c; j++) {
+            printf("%d\t", sum[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}`,
+
+String.raw`#include <stdio.h>
+
+int main(void) {
+    int a[10][10], b[10][10], sub[10][10];
+    int r, c, i, j;
+
+    printf("Enter rows and columns (max 10): ");
+    scanf("%d%d", &r, &c);
+
+    if (r < 1 || r > 10 || c < 1 || c > 10) {
+        printf("Invalid matrix size!\n");
+        return 0;
+    }
+
+    printf("Enter first matrix elements:\n");
+
+    for (i = 0; i < r; i++) {
+        for (j = 0; j < c; j++) {
+            scanf("%d", &a[i][j]);
+        }
+    }
+
+    printf("Enter second matrix elements:\n");
+
+    for (i = 0; i < r; i++) {
+        for (j = 0; j < c; j++) {
+            scanf("%d", &b[i][j]);
+        }
+    }
+
+    for (i = 0; i < r; i++) {
+        for (j = 0; j < c; j++) {
+            sub[i][j] = a[i][j] - b[i][j];
+        }
+    }
+
+    printf("Difference of matrices:\n");
+
+    for (i = 0; i < r; i++) {
+        for (j = 0; j < c; j++) {
+            printf("%d\t", sub[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}`,
+
+String.raw`#include <stdio.h>
+
+int main(void) {
+    int a[10][10], b[10][10], mul[10][10] = {0};
+    int r1, c1, r2, c2, i, j, k;
+
+    printf("Enter rows and columns of first matrix: ");
+    scanf("%d%d", &r1, &c1);
+
+    printf("Enter rows and columns of second matrix: ");
+    scanf("%d%d", &r2, &c2);
+
+    if (r1 < 1 || r1 > 10 || c1 < 1 || c1 > 10 ||
+        r2 < 1 || r2 > 10 || c2 < 1 || c2 > 10) {
+        printf("Invalid matrix size!\n");
+        return 0;
+    }
+
+    if (c1 != r2) {
+        printf("Matrix multiplication is not possible.\n");
+        return 0;
+    }
+
+    printf("Enter first matrix elements:\n");
+
+    for (i = 0; i < r1; i++) {
+        for (j = 0; j < c1; j++) {
+            scanf("%d", &a[i][j]);
+        }
+    }
+
+    printf("Enter second matrix elements:\n");
+
+    for (i = 0; i < r2; i++) {
+        for (j = 0; j < c2; j++) {
+            scanf("%d", &b[i][j]);
+        }
+    }
+
+    for (i = 0; i < r1; i++) {
+        for (j = 0; j < c2; j++) {
+            for (k = 0; k < c1; k++) {
+                mul[i][j] += a[i][k] * b[k][j];
+            }
+        }
+    }
+
+    printf("Product of matrices:\n");
+
+    for (i = 0; i < r1; i++) {
+        for (j = 0; j < c2; j++) {
+            printf("%d\t", mul[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}`
+        ];
+
+        const outputs = [
+
+String.raw`Enter four numbers:
+1 2 3 4
+Matrix is:
+1    2
+3    4`,
+
+String.raw`Enter rows and columns (max 10): 2 3
+Enter matrix elements:
+1 2 3
+4 5 6
+Original matrix:
+1    2    3
+4    5    6
+Transpose of matrix:
+1    4
+2    5
+3    6`,
+
+String.raw`Enter rows and columns (max 10): 2 2
+Enter first matrix elements:
+1 2
+3 4
+Enter second matrix elements:
+5 6
+7 8
+Sum of matrices:
+6    8
+10   12`,
+
+String.raw`Enter rows and columns (max 10): 2 2
+Enter first matrix elements:
+8 7
+6 5
+Enter second matrix elements:
+1 2
+3 4
+Difference of matrices:
+7    5
+3    1`,
+
+String.raw`Enter rows and columns of first matrix: 2 2
+Enter rows and columns of second matrix: 2 2
+Enter first matrix elements:
+1 2
+3 4
+Enter second matrix elements:
+5 6
+7 8
+Product of matrices:
+19   22
+43   50`
+        ];
+
+        const questionList = document.getElementById("questions");
+
+        questions.forEach(function(question, index) {
+            const box = document.createElement("div");
+            box.className = "question";
+
+            const link = document.createElement("a");
+            link.href = "#result";
+            link.textContent = question;
+
+            link.onclick = function() {
+                showProgram(index);
+            };
+
+            box.appendChild(link);
+            questionList.appendChild(box);
+        });
+
+        function showProgram(index) {
+            document.getElementById("questionTitle").textContent =
+                questions[index];
+
+            document.getElementById("code").textContent = codes[index];
+            document.getElementById("output").textContent = outputs[index];
+
+            document.getElementById("result").style.display = "block";
+
+            document.getElementById("result").scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
+    </script>
+
+</body>
+</html>
+

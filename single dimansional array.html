@@ -1,0 +1,610 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>C Language - Single Dimensional Array</title>
+
+    <style>
+        body {
+            background-color: lightyellow;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            color: darkblue;
+        }
+
+        h1 {
+            text-align: center;
+            color: darkblue;
+        }
+
+        h2 {
+            color: darkgreen;
+        }
+
+        .question {
+            background-color: white;
+            border: 2px solid lightblue;
+            border-radius: 10px;
+            padding: 12px;
+            margin: 10px 0;
+        }
+
+        .question a {
+            color: darkblue;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .question a:hover {
+            color: red;
+        }
+
+        #result {
+            display: none;
+            background-color: white;
+            border: 2px solid lightblue;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        .result-box {
+            display: flex;
+            gap: 20px;
+        }
+
+        .program-box, .output-box {
+            flex: 1;
+            min-width: 0;
+            background-color: #f8ffff;
+            border: 2px solid lightblue;
+            border-radius: 10px;
+            padding: 12px;
+        }
+
+        pre {
+            background-color: #eeeeee;
+            color: black;
+            padding: 12px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: darkblue;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: darkgreen;
+        }
+
+        .home {
+            text-align: center;
+            margin: 30px 0 10px;
+        }
+
+        @media (max-width: 700px) {
+            .result-box {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Single Dimensional Array</h1>
+
+    <p style="text-align:center;">
+        Click any question to view its program and output.
+    </p>
+
+    <h2>List of Questions</h2>
+
+    <div id="questions"></div>
+
+    <div id="result">
+        <h2 id="questionTitle"></h2>
+
+        <div class="result-box">
+            <div class="program-box">
+                <h3>C Program</h3>
+                <pre id="code"></pre>
+            </div>
+
+            <div class="output-box">
+                <h3>Sample Output</h3>
+                <pre id="output"></pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="home">
+        <button onclick="location.href='home.html'">Home</button>
+    </div>
+
+    <script>
+        const questions = [
+            "1. Enter an array from the user and display all values.",
+            "2. Enter an array and print it in reverse order.",
+            "3. Enter an array and copy it into a second array.",
+            "4. Copy an array into another array in reverse order.",
+            "5. Enter an array and print only even numbers.",
+            "6. Enter an array and print only positive numbers.",
+            "7. Enter an array and find the square of every value.",
+            "8. Enter 5 values and print the odd numbers.",
+            "9. Enter 5 values and calculate their sum.",
+            "10. Search for a value in an array.",
+            "11. Enter 5 values and sort them in ascending order.",
+            "12. Find the maximum value in an array."
+        ];
+
+        const codes = [
+
+String.raw`#include <stdio.h>
+
+int main(void) {
+    int arr[5], i;
+
+    for (i = 0; i < 5; i++) {
+        printf("Enter a number: ");
+        scanf("%d", &arr[i]);
+    }
+
+    printf("Array values are:\n");
+
+    for (i = 0; i < 5; i++) {
+        printf("%d\n", arr[i]);
+    }
+
+    return 0;
+}`,
+
+String.raw`#include <stdio.h>
+
+int main(void) {
+    int arr[5], i;
+
+    for (i = 0; i < 5; i++) {
+        printf("Enter a number: ");
+        scanf("%d", &arr[i]);
+    }
+
+    printf("Array in reverse order:\n");
+
+    for (i = 4; i >= 0; i--) {
+        printf("%d\n", arr[i]);
+    }
+
+    return 0;
+}`,
+
+String.raw`#include <stdio.h>
+
+int main(void) {
+    int arr1[5], arr2[5], n, i;
+
+    printf("Enter number of elements (1-5): ");
+    scanf("%d", &n);
+
+    if (n < 1 || n > 5) {
+        printf("Invalid size!\n");
+        return 0;
+    }
+
+    printf("Enter %d elements:\n", n);
+
+    for (i = 0; i < n; i++) {
+        scanf("%d", &arr1[i]);
+    }
+
+    for (i = 0; i < n; i++) {
+        arr2[i] = arr1[i];
+    }
+
+    printf("Copied array:\n");
+
+    for (i = 0; i < n; i++) {
+        printf("%d\n", arr2[i]);
+    }
+
+    return 0;
+}`,
+
+String.raw`#include <stdio.h>
+
+int main(void) {
+    int arr1[5], arr2[5], n, i;
+
+    printf("Enter number of elements (1-5): ");
+    scanf("%d", &n);
+
+    if (n < 1 || n > 5) {
+        printf("Invalid size!\n");
+        return 0;
+    }
+
+    printf("Enter %d elements:\n", n);
+
+    for (i = 0; i < n; i++) {
+        scanf("%d", &arr1[i]);
+    }
+
+    for (i = 0; i < n; i++) {
+        arr2[i] = arr1[n - 1 - i];
+    }
+
+    printf("Array copied in reverse order:\n");
+
+    for (i = 0; i < n; i++) {
+        printf("%d\n", arr2[i]);
+    }
+
+    return 0;
+}`,
+
+String.raw`#include <stdio.h>
+
+int main(void) {
+    int arr[5], n, i;
+
+    printf("Enter number of elements (1-5): ");
+    scanf("%d", &n);
+
+    if (n < 1 || n > 5) {
+        printf("Invalid size!\n");
+        return 0;
+    }
+
+    printf("Enter %d elements:\n", n);
+
+    for (i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    printf("Even numbers are:\n");
+
+    for (i = 0; i < n; i++) {
+        if (arr[i] % 2 == 0) {
+            printf("%d ", arr[i]);
+        }
+    }
+
+    printf("\n");
+    return 0;
+}`,
+
+String.raw`#include <stdio.h>
+
+int main(void) {
+    int arr[5], n, i;
+
+    printf("Enter number of elements (1-5): ");
+    scanf("%d", &n);
+
+    if (n < 1 || n > 5) {
+        printf("Invalid size!\n");
+        return 0;
+    }
+
+    printf("Enter %d elements:\n", n);
+
+    for (i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    printf("Positive numbers are:\n");
+
+    for (i = 0; i < n; i++) {
+        if (arr[i] > 0) {
+            printf("%d ", arr[i]);
+        }
+    }
+
+    printf("\n");
+    return 0;
+}`,
+
+String.raw`#include <stdio.h>
+
+int main(void) {
+    int arr[5], n, i;
+
+    printf("Enter number of elements (1-5): ");
+    scanf("%d", &n);
+
+    if (n < 1 || n > 5) {
+        printf("Invalid size!\n");
+        return 0;
+    }
+
+    printf("Enter %d elements:\n", n);
+
+    for (i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    for (i = 0; i < n; i++) {
+        arr[i] = arr[i] * arr[i];
+    }
+
+    printf("Squares of array values:\n");
+
+    for (i = 0; i < n; i++) {
+        printf("%d\n", arr[i]);
+    }
+
+    return 0;
+}`,
+
+String.raw`#include <stdio.h>
+
+int main(void) {
+    int arr[5], i;
+
+    printf("Enter 5 elements:\n");
+
+    for (i = 0; i < 5; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    printf("Odd numbers are:\n");
+
+    for (i = 0; i < 5; i++) {
+        if (arr[i] % 2 != 0) {
+            printf("%d ", arr[i]);
+        }
+    }
+
+    printf("\n");
+    return 0;
+}`,
+
+String.raw`#include <stdio.h>
+
+int main(void) {
+    int arr[5], i, sum = 0;
+
+    printf("Enter 5 elements:\n");
+
+    for (i = 0; i < 5; i++) {
+        scanf("%d", &arr[i]);
+        sum += arr[i];
+    }
+
+    printf("Sum of array elements = %d\n", sum);
+
+    return 0;
+}`,
+
+String.raw`#include <stdio.h>
+
+int main(void) {
+    int arr[5], i, value, found = 0;
+
+    printf("Enter 5 elements:\n");
+
+    for (i = 0; i < 5; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    printf("Enter value to search: ");
+    scanf("%d", &value);
+
+    for (i = 0; i < 5; i++) {
+        if (arr[i] == value) {
+            found = 1;
+            break;
+        }
+    }
+
+    if (found == 1) {
+        printf("Found\n");
+    } else {
+        printf("Not found\n");
+    }
+
+    return 0;
+}`,
+
+String.raw`#include <stdio.h>
+
+int main(void) {
+    int arr[5], i, j, temp;
+
+    printf("Enter 5 elements:\n");
+
+    for (i = 0; i < 5; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    for (i = 0; i < 4; i++) {
+        for (j = 0; j < 4 - i; j++) {
+            if (arr[j] > arr[j + 1]) {
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+
+    printf("Array in ascending order:\n");
+
+    for (i = 0; i < 5; i++) {
+        printf("%d ", arr[i]);
+    }
+
+    printf("\n");
+    return 0;
+}`,
+
+String.raw`#include <stdio.h>
+
+int main(void) {
+    int arr[5], n, i, max;
+
+    printf("Enter number of elements (1-5): ");
+    scanf("%d", &n);
+
+    if (n < 1 || n > 5) {
+        printf("Invalid size!\n");
+        return 0;
+    }
+
+    printf("Enter %d elements:\n", n);
+
+    for (i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    max = arr[0];
+
+    for (i = 1; i < n; i++) {
+        if (arr[i] > max) {
+            max = arr[i];
+        }
+    }
+
+    printf("Maximum value = %d\n", max);
+
+    return 0;
+}`
+        ];
+
+        const outputs = [
+
+String.raw`Enter a number: 10
+Enter a number: 20
+Enter a number: 30
+Enter a number: 40
+Enter a number: 50
+Array values are:
+10
+20
+30
+40
+50`,
+
+String.raw`Enter a number: 10
+Enter a number: 20
+Enter a number: 30
+Enter a number: 40
+Enter a number: 50
+Array in reverse order:
+50
+40
+30
+20
+10`,
+
+String.raw`Enter number of elements (1-5): 3
+Enter 3 elements:
+10 20 30
+Copied array:
+10
+20
+30`,
+
+String.raw`Enter number of elements (1-5): 4
+Enter 4 elements:
+10 20 30 40
+Array copied in reverse order:
+40
+30
+20
+10`,
+
+String.raw`Enter number of elements (1-5): 5
+Enter 5 elements:
+10 15 20 25 30
+Even numbers are:
+10 20 30`,
+
+String.raw`Enter number of elements (1-5): 5
+Enter 5 elements:
+-2 5 0 8 -4
+Positive numbers are:
+5 8`,
+
+String.raw`Enter number of elements (1-5): 4
+Enter 4 elements:
+2 3 4 5
+Squares of array values:
+4
+9
+16
+25`,
+
+String.raw`Enter 5 elements:
+1 2 3 4 5
+Odd numbers are:
+1 3 5`,
+
+String.raw`Enter 5 elements:
+10 20 30 40 50
+Sum of array elements = 150`,
+
+String.raw`Enter 5 elements:
+10 20 30 40 50
+Enter value to search: 30
+Found`,
+
+String.raw`Enter 5 elements:
+5 2 8 1 4
+Array in ascending order:
+1 2 4 5 8`,
+
+String.raw`Enter number of elements (1-5): 4
+Enter 4 elements:
+12 45 7 30
+Maximum value = 45`
+        ];
+
+        const questionList = document.getElementById("questions");
+
+        questions.forEach(function(question, index) {
+            const box = document.createElement("div");
+            box.className = "question";
+
+            const link = document.createElement("a");
+            link.href = "#result";
+            link.textContent = question;
+
+            link.onclick = function() {
+                showProgram(index);
+            };
+
+            box.appendChild(link);
+            questionList.appendChild(box);
+        });
+
+        function showProgram(index) {
+            document.getElementById("questionTitle").textContent =
+                questions[index];
+
+            document.getElementById("code").textContent = codes[index];
+            document.getElementById("output").textContent = outputs[index];
+
+            document.getElementById("result").style.display = "block";
+
+            document.getElementById("result").scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
+    </script>
+
+</body>
+</html>
+
+

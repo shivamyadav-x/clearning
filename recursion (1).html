@@ -1,0 +1,423 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C Language - Recursion Programs</title>
+
+    <style>
+        body {
+            background-color: lightyellow;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            color: darkblue;
+        }
+
+        h1 {
+            text-align: center;
+            color: darkblue;
+        }
+
+        h2 {
+            color: darkgreen;
+        }
+
+        p {
+            line-height: 1.5;
+        }
+
+        .question {
+            background-color: white;
+            border: 2px solid lightblue;
+            border-radius: 10px;
+            padding: 12px;
+            margin: 10px 0;
+        }
+
+        .question a {
+            color: darkblue;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .question a:hover {
+            color: red;
+        }
+
+        #result {
+            display: none;
+            background-color: white;
+            border: 2px solid lightblue;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 25px;
+        }
+
+        .result-container {
+            display: flex;
+            gap: 15px;
+            align-items: stretch;
+        }
+
+        .result-box {
+            flex: 1;
+            min-width: 0;
+            background-color: #f8ffff;
+            border: 2px solid lightblue;
+            border-radius: 10px;
+            padding: 12px;
+        }
+
+        pre {
+            background-color: #eeeeee;
+            color: black;
+            padding: 12px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            overflow-x: auto;
+            font-family: Consolas, monospace;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: darkblue;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: darkgreen;
+        }
+
+        .home-container {
+            text-align: center;
+            margin-top: 30px;
+            padding: 15px;
+        }
+
+        .home-button {
+            display: inline-block;
+            background-color: darkblue;
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 7px;
+        }
+
+        .home-button:hover {
+            background-color: darkgreen;
+        }
+
+        #message {
+            color: darkgreen;
+            font-weight: bold;
+        }
+
+        @media (max-width: 700px) {
+            .result-container {
+                flex-direction: column;
+            }
+
+            body {
+                margin: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>C Language - Recursion Programs</h1>
+
+    <p style="text-align:center;">
+        Welcome to the Recursion Programs section.
+        Click any question to view its C program and output.
+    </p>
+
+    <h2>Recursion Questions</h2>
+
+    <div id="questionList"></div>
+
+    <div id="result">
+
+        <h2 id="questionTitle"></h2>
+
+        <div class="result-container">
+
+            <div class="result-box">
+                <h3>C Program</h3>
+                <pre id="programCode"></pre>
+                <button onclick="copyCode()">Copy Code</button>
+            </div>
+
+            <div class="result-box">
+                <h3>Output</h3>
+                <pre id="programOutput"></pre>
+            </div>
+
+        </div>
+
+        <p id="message"></p>
+
+        <button onclick="window.print()">Print Program</button>
+
+    </div>
+
+    <!-- HOME BUTTON AT THE BOTTOM -->
+
+    <div class="home-container">
+        <a href="home.html" class="home-button">Home</a>
+    </div>
+
+    <script>
+
+        const questions = [
+
+            {
+                title: "Q1. Write a program to print 'A' using recursion.",
+
+                code: `#include <stdio.h>
+
+void printA(int n)
+{
+    if (n == 0)
+        return;
+
+    printf("A ");
+    printA(n - 1);
+}
+
+int main()
+{
+    printA(5);
+    return 0;
+}`,
+
+                output: `A A A A A`
+            },
+
+            {
+                title: "Q2. Write a program to print numbers from 1 to 5 using recursion.",
+
+                code: `#include <stdio.h>
+
+void print(int n)
+{
+    if (n > 5)
+        return;
+
+    printf("%d ", n);
+    print(n + 1);
+}
+
+int main()
+{
+    print(1);
+    return 0;
+}`,
+
+                output: `1 2 3 4 5`
+            },
+
+            {
+                title: "Q3. Write a program to print numbers from 5 to 1 using recursion.",
+
+                code: `#include <stdio.h>
+
+void print(int n)
+{
+    if (n < 1)
+        return;
+
+    printf("%d ", n);
+    print(n - 1);
+}
+
+int main()
+{
+    print(5);
+    return 0;
+}`,
+
+                output: `5 4 3 2 1`
+            },
+
+            {
+                title: "Q4. Write a program to print numbers using recursion without a base condition.",
+
+                code: `#include <stdio.h>
+
+void print(int n)
+{
+    printf("%d\\n", n);
+    print(n);
+}
+
+int main()
+{
+    print(1);
+    return 0;
+}`,
+
+                output: `1
+1
+1
+1
+1
+... infinite recursion
+
+Note: This program has no base condition.
+It continues until the program crashes
+or the system stops it.`
+            },
+
+            {
+                title: "Q5. Write a program to find the factorial of a number using recursion.",
+
+                code: `#include <stdio.h>
+
+int fact(int n)
+{
+    if (n == 0 || n == 1)
+        return 1;
+
+    return n * fact(n - 1);
+}
+
+int main()
+{
+    int num;
+
+    printf("Enter a number: ");
+    scanf("%d", &num);
+
+    printf("Factorial of %d = %d\\n",
+           num, fact(num));
+
+    return 0;
+}`,
+
+                output: `Enter a number: 5
+Factorial of 5 = 120`
+            }
+
+        ];
+
+        function displayQuestions()
+        {
+            const questionList =
+                document.getElementById("questionList");
+
+            questionList.innerHTML = "";
+
+            questions.forEach(function(question, index)
+            {
+                const card = document.createElement("div");
+                card.className = "question";
+
+                const link = document.createElement("a");
+                link.href = "#result";
+                link.textContent = question.title;
+
+                link.addEventListener("click", function(event)
+                {
+                    event.preventDefault();
+                    showQuestion(index);
+                });
+
+                card.appendChild(link);
+                questionList.appendChild(card);
+            });
+        }
+
+        function showQuestion(index)
+        {
+            const question = questions[index];
+
+            document.getElementById("questionTitle").textContent =
+                question.title;
+
+            document.getElementById("programCode").textContent =
+                question.code;
+
+            document.getElementById("programOutput").textContent =
+                question.output;
+
+            document.getElementById("message").textContent = "";
+
+            document.getElementById("result").style.display = "block";
+
+            document.getElementById("result").scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
+
+        function copyCode()
+        {
+            const code =
+                document.getElementById("programCode").textContent;
+
+            const message =
+                document.getElementById("message");
+
+            if (navigator.clipboard && window.isSecureContext)
+            {
+                navigator.clipboard.writeText(code)
+                    .then(function()
+                    {
+                        message.textContent =
+                            "Code copied successfully!";
+                    })
+                    .catch(function()
+                    {
+                        fallbackCopy(code, message);
+                    });
+            }
+            else
+            {
+                fallbackCopy(code, message);
+            }
+        }
+
+        function fallbackCopy(code, message)
+        {
+            const textarea = document.createElement("textarea");
+
+            textarea.value = code;
+            textarea.style.position = "fixed";
+            textarea.style.left = "-9999px";
+
+            document.body.appendChild(textarea);
+            textarea.select();
+
+            try
+            {
+                const copied = document.execCommand("copy");
+
+                message.textContent = copied
+                    ? "Code copied successfully!"
+                    : "Copy failed. Please copy the code manually.";
+            }
+            catch (error)
+            {
+                message.textContent =
+                    "Copy failed. Please copy the code manually.";
+            }
+
+            document.body.removeChild(textarea);
+        }
+
+        displayQuestions();
+
+    </script>
+
+</body>
+</html>

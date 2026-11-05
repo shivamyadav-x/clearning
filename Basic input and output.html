@@ -1,0 +1,475 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>C Programming Questions</title>
+
+    <style>
+        body {
+            background-color: lightyellow;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            color: darkblue;
+        }
+
+        h1 {
+            text-align: center;
+            color: darkblue;
+        }
+
+        h2 {
+            color: darkgreen;
+        }
+
+        .question {
+            background-color: white;
+            border: 2px solid lightblue;
+            border-radius: 10px;
+            padding: 12px;
+            margin: 10px 0;
+        }
+
+        a {
+            color: darkblue;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: red;
+        }
+
+        #result {
+            display: none;
+            background-color: white;
+            border: 2px solid lightblue;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        /* Program left aur output right side */
+        .result-box {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            margin-top: 15px;
+        }
+
+        .program-box,
+        .output-box {
+            flex: 1;
+            min-width: 0;
+            background-color: #f8ffff;
+            border: 1px solid lightblue;
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        pre {
+            background-color: #eeeeee;
+            color: black;
+            padding: 12px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            min-height: 100px;
+        }
+
+        button {
+            background-color: darkblue;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background-color: darkgreen;
+        }
+
+        /* Mobile screen ke liye */
+        @media (max-width: 600px) {
+            .result-box {
+                flex-direction: column;
+            }
+
+            .program-box,
+            .output-box {
+                width: auto;
+                align-self: stretch;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>C Programming Questions</h1>
+
+    <p style="text-align:center;">
+        Basic Input and Output Programs
+    </p>
+
+    <h2>Click on a question to see its program and output</h2>
+
+    <div class="question">
+        <a href="#result" onclick="showProgram(0, this.textContent.trim())">
+            1. Write a program to print the message: TODAY I MADE MY FIRST C PROGRAM.
+        </a>
+    </div>
+
+    <div class="question">
+        <a href="#result" onclick="showProgram(1, this.textContent.trim())">
+            2. Write a program to read a character from the keyboard and display it on the screen.
+        </a>
+    </div>
+
+    <div class="question">
+        <a href="#result" onclick="showProgram(2, this.textContent.trim())">
+            3. Write a program to read four characters from the keyboard and display them on separate lines.
+        </a>
+    </div>
+
+    <div class="question">
+        <a href="#result" onclick="showProgram(3, this.textContent.trim())">
+            4. Write a program to print your name on the screen.
+        </a>
+    </div>
+
+    <div class="question">
+        <a href="#result" onclick="showProgram(4, this.textContent.trim())">
+            5. Write a program to print a single quote character.
+        </a>
+    </div>
+
+    <div class="question">
+        <a href="#result" onclick="showProgram(5, this.textContent.trim())">
+            6. Write a program to print your name five times.
+        </a>
+    </div>
+
+    <div class="question">
+        <a href="#result" onclick="showProgram(6, this.textContent.trim())">
+            7. Write a program to print your name and class.
+        </a>
+    </div>
+
+    <div class="question">
+        <a href="#result" onclick="showProgram(7, this.textContent.trim())">
+            8. Write a program to display the message: Hello, welcome to C.
+        </a>
+    </div>
+
+    <div class="question">
+        <a href="#result" onclick="showProgram(8, this.textContent.trim())">
+            9. Write a program to print your name using printf().
+        </a>
+    </div>
+
+    <div class="question">
+        <a href="#result" onclick="showProgram(9, this.textContent.trim())">
+            10. Write a program to print a double quote character.
+        </a>
+    </div>
+
+    <div class="question">
+        <a href="#result" onclick="showProgram(10, this.textContent.trim())">
+            11. Write a program to print numbers from 1 to 5.
+        </a>
+    </div>
+
+    <div class="question">
+        <a href="#result" onclick="showProgram(11, this.textContent.trim())">
+            12. Write a program to input a password and display it as stars.
+        </a>
+    </div>
+
+    <div class="question">
+        <a href="#result" onclick="showProgram(12, this.textContent.trim())">
+            13. Write a program to input a character and print its ASCII value.
+        </a>
+    </div>
+
+    <div class="question">
+        <a href="#result" onclick="showProgram(13, this.textContent.trim())">
+            14. Write a program to print ASCII values from 0 to 127.
+        </a>
+    </div>
+
+    <!-- Program aur output section -->
+
+    <div id="result">
+
+        <h2 id="title"></h2>
+
+        <div class="result-box">
+
+            <div class="program-box">
+                <h3>Program:</h3>
+                <pre id="code"></pre>
+            </div>
+
+            <div class="output-box">
+                <h3>Expected Output:</h3>
+                <pre id="output"></pre>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Home button -->
+
+    <div style="text-align:center;">
+        <button onclick="window.location.href='home.html'">
+            Home
+        </button>
+    </div>
+
+    <script>
+        var codes = [
+
+`#include <stdio.h>
+
+int main()
+{
+    printf("TODAY I MADE MY FIRST C PROGRAM.");
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main()
+{
+    char ch;
+
+    printf("Enter a character: ");
+    scanf("%c", &ch);
+
+    printf("You entered: %c", ch);
+
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main()
+{
+    char a, b, c, d;
+
+    printf("Enter four characters: ");
+    scanf(" %c %c %c %c", &a, &b, &c, &d);
+
+    printf("%c\\n%c\\n%c\\n%c", a, b, c, d);
+
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main()
+{
+    printf("Shivam Yadav");
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main()
+{
+    printf("\\'");
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main()
+{
+    int i;
+
+    for(i = 1; i <= 5; i++)
+    {
+        printf("Shivam Yadav\\n");
+    }
+
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main()
+{
+    printf("Name: Shivam Yadav\\n");
+    printf("Class: 12th");
+
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main()
+{
+    printf("Hello, welcome to C.");
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main()
+{
+    printf("Shivam Yadav");
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main()
+{
+    printf("\\"");
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main()
+{
+    int i;
+
+    for(i = 1; i <= 5; i++)
+    {
+        printf("%d\\n", i);
+    }
+
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main()
+{
+    char password[20];
+    int i = 0;
+
+    printf("Enter password: ");
+    scanf("%19s", password);
+
+    printf("Password entered: ");
+
+    while(password[i] != '\\0')
+    {
+        printf("*");
+        i++;
+    }
+
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main()
+{
+    char ch;
+
+    printf("Enter a character: ");
+    scanf("%c", &ch);
+
+    printf("ASCII value = %d", ch);
+
+    return 0;
+}`,
+
+`#include <stdio.h>
+
+int main()
+{
+    int i;
+
+    for(i = 0; i <= 127; i++)
+    {
+        printf("%d = %c\\n", i, i);
+    }
+
+    return 0;
+}`
+
+        ];
+
+        var outputs = [
+
+`TODAY I MADE MY FIRST C PROGRAM.`,
+
+`Enter a character: A
+You entered: A`,
+
+`Enter four characters: A B C D
+A
+B
+C
+D`,
+
+`Shivam Yadav`,
+
+`'`,
+
+`Shivam Yadav
+Shivam Yadav
+Shivam Yadav
+Shivam Yadav
+Shivam Yadav`,
+
+`Name: Shivam Yadav
+Class: 12th`,
+
+`Hello, welcome to C.`,
+
+`Shivam Yadav`,
+
+`"`,
+
+`1
+2
+3
+4
+5`,
+
+`Enter password: hello
+Password entered: *****`,
+
+`Enter a character: A
+ASCII value = 65`,
+
+`ASCII characters from 0 to 127
+Example:
+65 = A
+66 = B
+67 = C
+...`
+
+        ];
+
+        function showProgram(n, question)
+        {
+            document.getElementById("result").style.display = "block";
+
+            // Click kiya hua poora question heading mein show hoga
+            document.getElementById("title").innerText = question;
+
+            // Selected program aur uska output
+            document.getElementById("code").innerText = codes[n];
+            document.getElementById("output").innerText = outputs[n];
+
+            // Result tak smoothly scroll hoga
+            document.getElementById("result").scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
+    </script>
+
+</body>
+</html>

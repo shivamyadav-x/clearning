@@ -1,0 +1,641 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C Language - String Programs</title>
+
+    <style>
+        body {
+            background-color: lightyellow;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            color: darkblue;
+        }
+
+        h1 {
+            text-align: center;
+            color: darkblue;
+        }
+
+        h2 {
+            color: darkgreen;
+        }
+
+        p {
+            line-height: 1.5;
+        }
+
+        .question {
+            background-color: white;
+            border: 2px solid lightblue;
+            border-radius: 10px;
+            padding: 12px;
+            margin: 10px 0;
+        }
+
+        .question a {
+            color: darkblue;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .question a:hover {
+            color: red;
+        }
+
+        #result {
+            display: none;
+            background-color: white;
+            border: 2px solid lightblue;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 25px;
+        }
+
+        .result-container {
+            display: flex;
+            gap: 15px;
+            align-items: stretch;
+        }
+
+        .result-box {
+            flex: 1;
+            min-width: 0;
+            background-color: #f8ffff;
+            border: 2px solid lightblue;
+            border-radius: 10px;
+            padding: 12px;
+        }
+
+        pre {
+            background-color: #eeeeee;
+            color: black;
+            padding: 12px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            overflow-x: auto;
+            font-family: Consolas, monospace;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: darkblue;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: darkgreen;
+        }
+
+        .home-container {
+            text-align: center;
+            margin-top: 30px;
+            padding: 15px;
+        }
+
+        .home-button {
+            display: inline-block;
+            background-color: darkblue;
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 7px;
+        }
+
+        .home-button:hover {
+            background-color: darkgreen;
+        }
+
+        #message {
+            color: darkgreen;
+            font-weight: bold;
+        }
+
+        @media (max-width: 700px) {
+            .result-container {
+                flex-direction: column;
+            }
+
+            body {
+                margin: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>C Language - String Programs</h1>
+
+    <p style="text-align:center;">
+     
+        Click any question to view its C program and output.
+    </p>
+
+    <h2>String Questions</h2>
+
+    <div id="questionList"></div>
+
+    <div id="result">
+        <h2 id="questionTitle"></h2>
+
+        <div class="result-container">
+
+            <div class="result-box">
+                <h3>C Program</h3>
+                <pre id="programCode"></pre>
+                <button onclick="copyCode()">Copy Code</button>
+            </div>
+
+            <div class="result-box">
+                <h3>Output</h3>
+                <pre id="programOutput"></pre>
+            </div>
+
+        </div>
+
+        <p id="message"></p>
+
+        <button onclick="window.print()">Print Program</button>
+    </div>
+
+    <!-- HOME BUTTON AT THE BOTTOM -->
+    <div class="home-container">
+        <a href="home.html" class="home-button">Home</a>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                title: "1. Convert a string into uppercase",
+                code: `#include <stdio.h>
+#include <ctype.h>
+
+int main() {
+    char str[] = "hello world";
+    int i;
+
+    for (i = 0; str[i] != '\\0'; i++) {
+        str[i] = toupper((unsigned char)str[i]);
+    }
+
+    printf("Uppercase string: %s", str);
+    return 0;
+}`,
+                output: `Uppercase string: HELLO WORLD`
+            },
+
+            {
+                title: "2. Convert a string into lowercase",
+                code: `#include <stdio.h>
+#include <ctype.h>
+
+int main() {
+    char str[] = "HELLO WORLD";
+    int i;
+
+    for (i = 0; str[i] != '\\0'; i++) {
+        str[i] = tolower((unsigned char)str[i]);
+    }
+
+    printf("Lowercase string: %s", str);
+    return 0;
+}`,
+                output: `Lowercase string: hello world`
+            },
+
+            {
+                title: "3. Convert the first letter of a sentence to uppercase",
+                code: `#include <stdio.h>
+#include <ctype.h>
+
+int main() {
+    char str[] = "hello world";
+
+    str[0] = toupper((unsigned char)str[0]);
+
+    printf("%s", str);
+    return 0;
+}`,
+                output: `Hello world`
+            },
+
+            {
+                title: "4. Toggle the case of each character",
+                code: `#include <stdio.h>
+#include <ctype.h>
+
+int main() {
+    char str[] = "HeLLo";
+    int i;
+
+    for (i = 0; str[i] != '\\0'; i++) {
+        if (islower((unsigned char)str[i]))
+            str[i] = toupper((unsigned char)str[i]);
+        else if (isupper((unsigned char)str[i]))
+            str[i] = tolower((unsigned char)str[i]);
+    }
+
+    printf("%s", str);
+    return 0;
+}`,
+                output: `hEllO`
+            },
+
+            {
+                title: "5. Find the length of a string",
+                code: `#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str[] = "Computer";
+
+    printf("Length = %lu", (unsigned long)strlen(str));
+    return 0;
+}`,
+                output: `Length = 8`
+            },
+
+            {
+                title: "6. Compare two strings",
+                code: `#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str1[] = "apple";
+    char str2[] = "apple";
+
+    if (strcmp(str1, str2) == 0)
+        printf("Strings are equal");
+    else
+        printf("Strings are not equal");
+
+    return 0;
+}`,
+                output: `Strings are equal`
+            },
+
+            {
+                title: "7. Concatenate two strings",
+                code: `#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str1[50] = "Hello ";
+    char str2[] = "World";
+
+    strcat(str1, str2);
+
+    printf("%s", str1);
+    return 0;
+}`,
+                output: `Hello World`
+            },
+
+            {
+                title: "8. Copy one string into another",
+                code: `#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char source[] = "Programming";
+    char destination[50];
+
+    strcpy(destination, source);
+
+    printf("Copied string: %s", destination);
+    return 0;
+}`,
+                output: `Copied string: Programming`
+            },
+
+            {
+                title: "9. Print a character at a given index",
+                code: `#include <stdio.h>
+
+int main() {
+    char str[] = "COMPUTER";
+    int index = 3;
+
+    printf("Character = %c", str[index]);
+    return 0;
+}`,
+                output: `Character = P`
+            },
+
+            {
+                title: "10. Print each character of a string",
+                code: `#include <stdio.h>
+
+int main() {
+    char str[] = "CAT";
+    int i;
+
+    for (i = 0; str[i] != '\\0'; i++) {
+        printf("%c\\n", str[i]);
+    }
+
+    return 0;
+}`,
+                output: `C
+A
+T`
+            },
+
+            {
+                title: "11. Reverse a string",
+                code: `#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str[] = "HELLO";
+    int i, length;
+
+    length = (int)strlen(str);
+
+    printf("Reversed string: ");
+
+    for (i = length - 1; i >= 0; i--) {
+        printf("%c", str[i]);
+    }
+
+    return 0;
+}`,
+                output: `Reversed string: OLLEH`
+            },
+
+            {
+                title: "12. Find the ASCII value of each character",
+                code: `#include <stdio.h>
+
+int main() {
+    char str[] = "ABC";
+    int i;
+
+    for (i = 0; str[i] != '\\0'; i++) {
+        printf("%c = %d\\n", str[i],
+               (unsigned char)str[i]);
+    }
+
+    return 0;
+}`,
+                output: `A = 65
+B = 66
+C = 67`
+            },
+
+            {
+                title: "13. Search for a character in a string",
+                code: `#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str[] = "COMPUTER";
+    char ch = 'P';
+
+    if (strchr(str, ch) != NULL)
+        printf("Character found");
+    else
+        printf("Character not found");
+
+    return 0;
+}`,
+                output: `Character found`
+            },
+
+            {
+                title: "14. Find the position of a character",
+                code: `#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str[] = "COMPUTER";
+    char ch = 'P';
+    char *ptr = strchr(str, ch);
+
+    if (ptr != NULL)
+        printf("Position = %d", (int)(ptr - str) + 1);
+    else
+        printf("Character not found");
+
+    return 0;
+}`,
+                output: `Position = 4`
+            },
+
+            {
+                title: "15. Count vowels in a string",
+                code: `#include <stdio.h>
+#include <ctype.h>
+
+int main() {
+    char str[] = "education";
+    int i, count = 0;
+    char ch;
+
+    for (i = 0; str[i] != '\\0'; i++) {
+        ch = (char)tolower((unsigned char)str[i]);
+
+        if (ch == 'a' || ch == 'e' || ch == 'i' ||
+            ch == 'o' || ch == 'u') {
+            count++;
+        }
+    }
+
+    printf("Number of vowels = %d", count);
+    return 0;
+}`,
+                output: `Number of vowels = 5`
+            },
+
+            {
+                title: "16. Print a substring using index positions",
+                code: `#include <stdio.h>
+
+int main() {
+    char str[] = "PROGRAMMING";
+    int i;
+
+    printf("Substring: ");
+
+    for (i = 3; i < 7; i++) {
+        printf("%c", str[i]);
+    }
+
+    return 0;
+}`,
+                output: `Substring: GRAM`
+            },
+
+            {
+                title: "17. Check whether a string is a palindrome",
+                code: `#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str[] = "madam";
+    int i, length, palindrome = 1;
+
+    length = (int)strlen(str);
+
+    for (i = 0; i < length / 2; i++) {
+        if (str[i] != str[length - 1 - i]) {
+            palindrome = 0;
+            break;
+        }
+    }
+
+    if (palindrome)
+        printf("String is a palindrome");
+    else
+        printf("String is not a palindrome");
+
+    return 0;
+}`,
+                output: `String is a palindrome`
+            },
+
+            {
+                title: "18. Display student details using strings",
+                code: `#include <stdio.h>
+
+int main() {
+    char name[] = "Rahul";
+    char course[] = "BCA";
+    int roll = 12;
+
+    printf("Name: %s\\n", name);
+    printf("Course: %s\\n", course);
+    printf("Roll Number: %d", roll);
+
+    return 0;
+}`,
+                output: `Name: Rahul
+Course: BCA
+Roll Number: 12`
+            },
+
+            {
+                title: "19. Calculate total and average marks",
+                code: `#include <stdio.h>
+
+int main() {
+    char name[] = "Rahul";
+    int marks[3] = {80, 75, 85};
+    int total = 0, i;
+    float average;
+
+    for (i = 0; i < 3; i++) {
+        total += marks[i];
+    }
+
+    average = total / 3.0f;
+
+    printf("Name: %s\\n", name);
+    printf("Total marks = %d\\n", total);
+    printf("Average marks = %.2f", average);
+
+    return 0;
+}`,
+                output: `Name: Rahul
+Total marks = 240
+Average marks = 80.00`
+            }
+        ];
+
+        function displayQuestions() {
+            const questionList = document.getElementById("questionList");
+            questionList.innerHTML = "";
+
+            questions.forEach(function(question, index) {
+                const card = document.createElement("div");
+                card.className = "question";
+
+                const link = document.createElement("a");
+                link.href = "#result";
+                link.textContent = question.title;
+
+                link.addEventListener("click", function(event) {
+                    event.preventDefault();
+                    showQuestion(index);
+                });
+
+                card.appendChild(link);
+                questionList.appendChild(card);
+            });
+        }
+
+        function showQuestion(index) {
+            const question = questions[index];
+
+            document.getElementById("questionTitle").textContent =
+                question.title;
+
+            document.getElementById("programCode").textContent =
+                question.code;
+
+            document.getElementById("programOutput").textContent =
+                question.output;
+
+            document.getElementById("message").textContent = "";
+            document.getElementById("result").style.display = "block";
+
+            document.getElementById("result").scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
+
+        function copyCode() {
+            const code = document.getElementById("programCode").textContent;
+            const message = document.getElementById("message");
+
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(code)
+                    .then(function() {
+                        message.textContent = "Code copied successfully!";
+                    })
+                    .catch(function() {
+                        fallbackCopy(code, message);
+                    });
+            } else {
+                fallbackCopy(code, message);
+            }
+        }
+
+        function fallbackCopy(code, message) {
+            const textarea = document.createElement("textarea");
+            textarea.value = code;
+            textarea.style.position = "fixed";
+            textarea.style.left = "-9999px";
+
+            document.body.appendChild(textarea);
+            textarea.select();
+
+            try {
+                const copied = document.execCommand("copy");
+                message.textContent = copied
+                    ? "Code copied successfully!"
+                    : "Copy failed. Please copy the code manually.";
+            } catch (error) {
+                message.textContent =
+                    "Copy failed. Please copy the code manually.";
+            }
+
+            document.body.removeChild(textarea);
+        }
+
+        displayQuestions();
+    </script>
+
+</body>
+</html>

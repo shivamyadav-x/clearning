@@ -1,0 +1,179 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C Programming Questions - Pattern Programs</title>
+
+    <style>
+        body {
+            background-color: lightyellow;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            color: darkblue;
+        }
+
+        h1 {
+            text-align: center;
+            color: darkblue;
+        }
+
+        h2 {
+            color: darkgreen;
+        }
+
+        .question {
+            background-color: white;
+            border: 2px solid lightblue;
+            border-radius: 10px;
+            padding: 12px;
+            margin: 10px 0;
+        }
+
+        .question a {
+            color: darkblue;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .question a:hover {
+            color: red;
+        }
+
+        #result {
+            display: none;
+            background-color: white;
+            border: 2px solid lightblue;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        .result-box {
+            display: flex;
+            gap: 20px;
+        }
+
+        .program-box, .output-box {
+            flex: 1;
+            min-width: 0;
+            background-color: #f8ffff;
+            border: 2px solid lightblue;
+            border-radius: 10px;
+            padding: 12px;
+        }
+
+        pre {
+            background-color: #eeeeee;
+            color: black;
+            padding: 12px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            overflow-x: auto;
+        }
+
+        button {
+            background-color: darkblue;
+            color: white;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 8px 5px 8px 0;
+        }
+
+        button:hover {
+            background-color: darkgreen;
+        }
+
+        .bottom-button {
+            text-align: center;
+            margin: 25px 0;
+        }
+
+        @media (max-width: 700px) {
+            .result-box {
+                flex-direction: column;
+            }
+
+            body {
+                margin: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>C Programming Questions</h1>
+    <p style="text-align:center;">Pattern Printing Programs</p>
+
+    <h2>Click on a question to see its program and output</h2>
+
+    <div class="question">
+        <a href="#result" onclick="showProgram(); return false;">
+            1. Write a program to print the pattern on the screen.
+        </a>
+    </div>
+
+    <div id="result">
+        <h2>Question 1: Pattern Printing</h2>
+
+        <div class="result-box">
+
+            <div class="program-box">
+                <h3>C Program</h3>
+
+                <pre id="code">#include &lt;stdio.h&gt;
+
+int main(void)
+{
+    int i, j;
+
+    for (i = 1; i <= 5; i++)
+    {
+        printf("1");
+    }
+
+    printf("\n");
+
+    for (j = 1; j <= 10; j++)
+    {
+        printf("1");
+    }
+
+    printf("\n");
+
+    return 0;
+}</pre>
+            </div>
+
+            <div class="output-box">
+                <h3>Sample Output</h3>
+
+                <pre>11111
+1111111111</pre>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="bottom-button">
+        <button onclick="location.href='home.html'">Home</button>
+    </div>
+
+    <script>
+        function showProgram() {
+            document.getElementById("result").style.display = "block";
+
+            document.getElementById("result").scrollIntoView({
+                behavior: "smooth"
+            });
+        }
+    </script>
+
+</body>
+</html>
+
